@@ -1,0 +1,139 @@
+=== jvm模板
+
+* CMS:
+
+* -XX:+UseConcMarkSweepGC
+
+* -XX:+UseParNewGC
+
+* -Xmx8G 最大堆
+
+* -Xms8G 初始化堆
+
+* -Xmn4G 年轻代
+
+* -XX:SurvivorRatio=
+
+eden与survivor比值，注意有2个survivor
+
+* -XX:NewRatio=6
+
+* -XX:TargetSurvivorRatio=80
+Survivor，从年龄为1到n的对象如果超过了80%，那么年龄阈值动态调整为n
+
+* G1:
+
+* -XX:+UseG1GC
+
+* -XX:G1HeapRegionSize=
+
+* -XX:+UnlockExperimentalVMOptions
+
+* -XX:G1NewSizePercent=
+
+* -XX:SurvivorRatio=
+
+eden与survivor比值，注意有1个survivor
+
+* Common:
+
+* -Xmx
+
+* -Xms
+* -server
+* -XX:MaxTenuringThreshold=
+'''
+* gc:
+
+以下参数建议线上全部添加
+
+* -Xloggc:filename.yyyy.MM.dd.HH.mm.ss.SSS.log
+
+* -XX:+PrintGC
+
+* -XX:+PrintReferenceGC
+
+* -XX:+PrintHeapAtGC
+
+* -XX:+PrintGCDetails
+
+* -XX:+PrintGCTimeStamps
+
+打印时间戳，可以方便的排查safepoint相关问题，因为safepoint日志仅打印时间戳。
+
+* -XX:+PrintGCDateStamps
+
+* -XX:+PrintAdaptiveSizePolicy
+
+* -XX:+PrintGCApplicationStoppedTime
+
+* -XX:+PrintGCApplicationConcurrentTime
+
+* -XX:+PrintTenuringDistribution
+
+'''
+* safepoint:
+
+以下参数建议线上全部添加，Safepoint相关日志会输出至stdout
+
+* -XX:+SafepointTimeout
+* -XX:SafepointTimeoutDelay=1000
+* -XX:+PrintSafepointStatistics
+* -XX:PrintSafepointStatisticsCount=1
+* 偏向锁优化
+
+* -XX:-UseBiasedLocking
+
+* 其他
+
+有的时候可能Safepoint相关日志没有输出至stdout，添加下述参数
+
+* -XX:+UnlockDiagnosticVMOptions
+* -XX:+LogVMOutput
+* -XX:LogFile=vm.log
+
+=== 注意事项
+
+* stdout和stderr记得重定向到某文件，加时间戳以免覆盖
+* gc日志加时间戳以免覆盖
+
+=== jdk11
+
+参考 https://blog.csdn.net/JKX_geek/article/details/104873302
+
+* 日志：
+
+-Xlog:gc*,safepoint=debug:gc.log:time,uptime,level,tags
+
+gc* 包含gc的标签都打印
+
+其中safepoint包含了jdk8中的
+
+* -XX:+PrintGCApplicationConcurrentTime
+* -XX:+PrintGCApplicationStoppedTime
+例子：
+[2022-01-13T16:47:12.709+0800][95.521s][info ][safepoint ] Application time: 0.0005676 seconds
+[2022-01-13T16:47:12.710+0800][95.521s][info ][safepoint ] Total time for which application threads were stopped: 0.0002605 seconds, Stopping threads took: 0.0001580 seconds
+
+-XX:+PrintGCTimeStamps
+-XX:+PrintGCDateStamps
+由上面的time替代
+
+time [2022-01-13T16:47:12.710+0800] 当前时间戳
+uptime [95.521s] 从启动到现在，程序的运行时间
+
+在macos zsh终端环境，-Xlog因为有通配符，需要加引号，否则报错zsh: no matches found:
+
+____
+
+example
+java "-Xlog:gc*,safepoint=debug:gc.log:time,uptime,level,tags" -jar odin-infra-data.jar
+
+____
+
+内存
+
+-XX:+UseContainerSupport
+-XX:MaxRAMPercentage=75.0
+-XX:InitialRAMPercentage=75.0
+-XX:MinRAMPercentage=75.0

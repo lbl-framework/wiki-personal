@@ -1,0 +1,17 @@
+[[index]]
+= 文档索引
+include::authors.adoc[]
+v{spring-boot-version}
+include::attributes.adoc[]
+
+
+
+[horizontal]
+<<application-center#create-app,应用中心>> ::
+<<basic-components#Keboot,Keboot>> ::
+<<doc-compare#doc-compare,文档选型对比>> ::
+<<network#network,网络环境>> ::
+<<system#system,友情链接>> ::
+
+//[horizontal]
+//<<application-properties#application-properties,Application Properties>> :: Common application properties that you can use to configure your application.
