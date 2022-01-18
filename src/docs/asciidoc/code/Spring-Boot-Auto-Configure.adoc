@@ -86,9 +86,9 @@ ____
 
 经过调查，发现com.ke.talent.common.rest.config.ValidatorConfiguration也是通过自动装配注入的
 
-image:images/image1.png[image.png]
+image:../images/image1.png[image.png]
 
-image:images/image2.png[image.png]
+image:../images/image2.png[image.png]
 
 那么两个自动装配的bean的加载顺序是怎么决定的呢？通过debug，阅读源码发现此处决定了自动装配的顺序org.springframework.boot.autoconfigure.AutoConfigurationSorter#getInPriorityOrder
 
@@ -127,15 +127,15 @@ image:images/image2.png[image.png]
 
 这个需要从启动类开始分析，如下
 
-image:images/image3.png[image.png]
+image:../images/image3.png[image.png]
 
 SpringApplication将Application这个类作为参数传入，而这个类上有一个@SpringCloudApplication注解，继续追踪该注解，发现其元注解包括
 
-image:images/image4.png[iamge]
+image:../images/image4.png[iamge]
 
-image:images/image5.png[image.png]
+image:../images/image5.png[image.png]
 
-image:images/image6.png[image.png]
+image:../images/image6.png[image.png]
 
 注意这两个元注解
 
@@ -150,7 +150,7 @@ image:images/image6.png[image.png]
 
 Debug，阅读源码，找到核心代码段org.springframework.context.annotation.ConfigurationClassParser#parse(java.util.Set&lt;org.springframework.beans.factory.config.BeanDefinitionHolder&gt;)
 
-image:images/image7.png[image.png]
+image:../images/image7.png[image.png]
 
 由于代码逻辑还是比较多的，这里不再展开，仅说明这两处代码做了什么事情。
 
