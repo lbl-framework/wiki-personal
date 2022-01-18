@@ -1,0 +1,5 @@
+[[k8s]]
+= k8s技术
+include::../attributes.adoc[]
+
+include::k8s-user.adoc[]

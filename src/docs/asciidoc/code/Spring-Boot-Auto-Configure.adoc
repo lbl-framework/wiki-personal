@@ -1,4 +1,4 @@
-== 自动装配的机制
+== springboot自动装配的机制
 
 自动装配在Spring Boot中非常重要，是Spring Boot starters的基石，本文将从一个业务问题解析自动装配的机制。
 
@@ -20,14 +20,14 @@ Spring Boot项目bean注册顺序
 
 最近业务同学反馈了一个这样的问题
 
-____
+[source,text]
+----
 
-org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'methodValidationPostProcessor' defined in class path resource [com/ke/talent/common/rest/config/ValidatorConfiguration.class]: Cannot register bean definition [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=validatorConfiguration; factoryMethodName=methodValidationPostProcessor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/ke/talent/common/rest/config/ValidatorConfiguration.class]] for bean 'methodValidationPostProcessor': <font color="#dd0000" size="5">There is already</font> [Root bean: class [org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=methodValidationPostProcessor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/validation/ValidationAutoConfiguration.class]] bound.
+org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'methodValidationPostProcessor'...
 
 //省略若干日志
 Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
-
-____
+----
 
 上述日志显示，com.ke.talent.common.rest.config包下的ValidatorConfiguration.class中定义了一个bean，和Spring Boot自动装配中的bean发生了bean定义冲突。
 
@@ -35,7 +35,7 @@ ____
 ----
 package com.ke.talent.common.rest.config;
 //省略若干代码
-mv
+
 @Configuration
 public class ValidatorConfiguration {
 //省略若干代码

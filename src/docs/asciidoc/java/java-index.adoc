@@ -1,0 +1,7 @@
+[[java]]
+= java技术
+include::../attributes.adoc[]
+
+include::jvm-vmoptions.adoc[]
+
+include::lock.adoc[]

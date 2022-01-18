@@ -10,3 +10,4 @@
 :sectnums:
 //这个默认可以调整小标题的层级，默认是3，层级最好不要太深，springboot文档也是选的默认值
 //:sectnumlevels: 5
+:index-link: ../index.html

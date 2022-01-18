@@ -1,0 +1,5 @@
+[[docker]]
+= 容器技术
+include::../attributes.adoc[]
+
+include::locale.adoc[]

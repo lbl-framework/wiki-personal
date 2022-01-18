@@ -30,9 +30,9 @@ processResources {
 asciidoctor {
 	configurations "asciidoctorExtensions"
 	baseDirFollowsSourceFile()
-	baseDirFollowsSourceDir()
+//	baseDirFollowsSourceDir()
 	sources {
-		include "*.adoc"
+		include "**/*index.*"
 	}
 	outputOptions {
 		backends "spring-html"
