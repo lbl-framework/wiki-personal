@@ -61,11 +61,11 @@ Survivor区只能通过比例配置。
 +
 建议使用以下默认值
 
-NOTE: 关于java在容器中locale更多细节见link:../docker/docker-index.html#java-locale[java-locale]
-
 ** 文件编码 -Dfile.encoding=UTF-8
 ** 国家 -Duser.country=CN
 ** 语言 -Duser.language=zh
+
+NOTE: 关于java在容器中locale更多细节见link:../docker/docker-index.html#java-locale[java-locale]
 
 ==== 可选
 * safepoint
