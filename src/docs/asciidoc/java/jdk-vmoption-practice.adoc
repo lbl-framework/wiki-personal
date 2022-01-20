@@ -112,12 +112,10 @@ java "-Xlog:gc*,safepoint=debug:gc.log:time,uptime,level,tags" -jar odin-infra-d
 * 垃圾回收器
 +
 推荐默认ZGC
+
 ** G1 -XX:+UseG1GC
 ** ZGC -XX:+UseZGC
 
-* 内存
-+
-同JDK8u
+* 内存 同JDK8u
 
-* locale
-同JDK8u
+* locale 同JDK8u
