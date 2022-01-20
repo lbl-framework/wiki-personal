@@ -1,5 +1,5 @@
 == JVM Options 实践
-本文讨论了JDK8u/11/17在生产中的配置
+本节讨论了JDK8u/11/17在生产中的配置
 
 === JDK8u
 
@@ -61,7 +61,8 @@ Survivor区只能通过比例配置。
 +
 建议使用以下默认值
 
-NOTE: 更多细节见link:../docker/docker-index.html#java 默认locale与编码问题[]
+NOTE: 关于java在容器中locale更多细节见link:../docker/docker-index.html#java-locale[java-locale]
+
 ** 文件编码 -Dfile.encoding=UTF-8
 ** 国家 -Duser.country=CN
 ** 语言 -Duser.language=zh
@@ -85,8 +86,7 @@ stdout和stderr记得重定向到文件或者进行采集
 === JDK11
 
 ==== 必选
--XX:-UseBiasedLocking -Xss256k
--Xlog:gc*,safepoint=debug:path/to/gc.log:time,uptime,level,tags
+-XX:-UseBiasedLocking -Xss256k -Xlog:gc*,safepoint=debug:path/to/gc.log:time,uptime,level,tags
 
 ==== 定制
 * 垃圾回收器
@@ -98,6 +98,7 @@ JDK11建议仅提供G1 GC，配置方法与JDK8u相同
 
 [NOTE]
 ====
+[%hardbreaks]
 在macos zsh终端环境，-Xlog因为有通配符，需要加引号，否则报错zsh: no matches found，例子：
 java "-Xlog:gc*,safepoint=debug:gc.log:time,uptime,level,tags" -jar odin-infra-data.jar
 ====
