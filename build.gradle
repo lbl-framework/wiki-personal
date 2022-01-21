@@ -27,6 +27,8 @@ processResources {
 	}
 }
 
+
+
 asciidoctor {
 	configurations "asciidoctorExtensions"
 	baseDirFollowsSourceFile()
@@ -36,6 +38,11 @@ asciidoctor {
 	}
 	outputOptions {
 		backends "spring-html"
+	}
+	resources{
+		from(sourceDir) {
+			include '*.html'
+		}
 	}
 }
 
