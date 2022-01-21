@@ -4,4 +4,6 @@ include::../attributes.adoc[]
 
 include::jvm-vmoptions.adoc[]
 
+include::jdk-vmoption-practice.adoc[]
+
 include::lock.adoc[]
