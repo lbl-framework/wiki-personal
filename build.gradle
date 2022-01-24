@@ -41,7 +41,7 @@ asciidoctor {
 	}
 	resources{
 		from(sourceDir) {
-			include '*.html',"*.xml"
+			include '*.html',"*.xml","CNAME"
 		}
 	}
 }
